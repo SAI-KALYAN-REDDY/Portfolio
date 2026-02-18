@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K. SAI KALYAN REDDY | Aspiring Data Analyst</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #120c24; /* Fallback background */
+            color: #e5e7eb; /* Default text color */
+            overflow-x: hidden;
+        }
+
+        /* Animated background container (Added subtle gradient for effect) */
+        #animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0; /* Positioned behind the content */
+            background: radial-gradient(circle at 10% 20%, rgba(68, 122, 185, 0.1) 0%, rgba(18, 12, 36, 1) 90%), 
+                        radial-gradient(circle at 90% 80%, rgba(137, 37, 190, 0.1) 0%, rgba(18, 12, 36, 1) 90%);
+        }
+        
+        /* Custom bounce animation for scroll arrow */
+        @keyframes bounce-slow {
+          0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+          }
+          50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          }
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 2s infinite;
+        }
+
+        /* Slide-in animation */
+        .slide-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Component Styles */
+        .skill-card {
+            background-color: rgba(17, 24, 39, 0.5);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgb(55, 65, 81);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 300ms ease-in-out;
+        }
+        .skill-card:hover {
+            background-color: rgba(137, 37, 190, 0.2);
+            border-color: rgb(167, 139, 250);
+            transform: scale(1.05);
+        }
+
+        .certificate-item {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .certificate-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(137, 37, 190, 0.15);
+        }
+
+        .project-card-interactive {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card-interactive:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(137, 37, 190, 0.15);
+        }
+
+        .project-icon {
+            color: rgb(156, 163, 175);
+            transition: color 300ms ease-in-out, transform 300ms ease-in-out;
+        }
+        .project-icon:hover {
+            color: rgb(167, 139, 250);
+            transform: scale(1.1);
+        }
+
+        .contact-link {
+            color: rgb(209, 213, 219);
+            transition: color 300ms ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .contact-link:hover {
+            color: rgb(167, 139, 250);
+        }
+
+        .contact-icon {
+            color: rgb(156, 163, 175);
+            transition: color 300ms ease-in-out, transform 300ms ease-in-out;
+        }
+        .contact-icon:hover {
+            color: rgb(167, 139, 250);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="animated-background"></div>
+
+    <div class="relative z-10">
+
+        <header class="fixed top-0 left-0 w-full bg-black/20 backdrop-blur-sm z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold text-violet-400 hover:text-violet-300 transition-colors">K. SAI KALYAN REDDY</a>
+                <ul class="hidden md:flex items-center space-x-8 text-gray-200">
+                    <li><a href="#home" class="hover:text-violet-400 transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-violet-400 transition-colors">About</a></li>
+                    <li><a href="#skills" class="hover:text-violet-400 transition-colors">Skills</a></li>
+                    <li><a href="#certificates" class="hover:text-violet-400 transition-colors">Certificates</a></li>
+                    <li><a href="#projects" class="hover:text-violet-400 transition-colors">Projects</a></li>
+                    <li><a href="#contact" class="hover:text-violet-400 transition-colors">Contact</a></li>
+                </ul>
+                <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-200" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden bg-black/50">
+                 <ul class="flex flex-col items-center space-y-4 py-4 text-gray-200">
+                    <li><a href="#home" class="hover:text-violet-400 transition-colors mobile-link">Home</a></li>
+                    <li><a href="#about" class="hover:text-violet-400 transition-colors mobile-link">About</a></li>
+                    <li><a href="#skills" class="hover:text-violet-400 transition-colors mobile-link">Skills</a></li>
+                    <li><a href="#certificates" class="hover:text-violet-400 transition-colors mobile-link">Certificates</a></li>
+                    <li><a href="#projects" class="hover:text-violet-400 transition-colors mobile-link">Projects</a></li>
+                    <li><a href="#contact" class="hover:text-violet-400 transition-colors mobile-link">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="container mx-auto">
+
+            <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6">
+                <div class="w-28 h-28 bg-violet-600/80 rounded-full flex items-center justify-center mb-8 shadow-lg shadow-violet-500/40">
+                    <span class="text-white text-4xl font-bold">KS</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold text-white">K. SAI KALYAN REDDY</h1>
+                <p class="text-2xl md:text-3xl mt-4 text-violet-400">Aspiring Data Analyst</p>
+                <p class="mt-6 max-w-2xl text-gray-300">I turn data into insights and build intelligent systems. Welcome to my digital space where I showcase my journey in the world of data.</p>
+                
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#projects" class="bg-violet-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-violet-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-violet-500/40">
+                        Explore My Work
+                    </a>
+                    <a href="assets/sai cv.pdf" download class="bg-black/20 border border-gray-600 text-gray-200 font-bold py-3 px-8 rounded-lg hover:bg-black/40 hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
+                        Download Resume <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
+
+                <a href="#about" class="absolute bottom-10 text-gray-400 text-3xl animate-bounce-slow hover:text-violet-400 transition-colors">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </section>
+
+            <section id="about" class="py-24 px-6">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                    About <span class="text-violet-400">Me</span>
+                </h2>
+                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                    An enthusiastic Data Science student passionate about exploring data, uncovering trends, and building intelligent systems that make an impact.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-12 items-start">
+                    <div class="md:col-span-2">
+                        <h3 class="text-3xl font-semibold text-violet-400 mb-6 text-left">My Journey</h3>
+                        <div class="space-y-4 text-gray-300 leading-relaxed text-left">
+                            <p>
+I am a passionate third-year Data Science student at Lovely Professional University, driven by curiosity and a desire to solve real-world problems through technology. With strong foundations in Python, Java, C++, and SQL, I enjoy applying my skills to extract meaningful insights from data.                            <p>
+I love transforming complex datasets into actionable intelligence, using tools like Power BI and Python libraries to uncover patterns, optimize processes, and build data-driven solutions that make an impact. 
+A proactive learner, I continuously explore emerging technologies, thrive in collaborative environments, and am eager to contribute my analytical and technical skills to innovative projects in data analytics and software development.                          
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-8 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-white mb-6 text-left">Education & Details</h3>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <div class="text-violet-400 text-xl mr-4 mt-1"><i class="fas fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Data Science Engineering</h4>
+                                    <p class="text-gray-400">Lovely professional University</p>
+                                    <p class="text-gray-500 text-sm">Currently pursuing bachelor's degree</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-violet-400 text-xl mr-4 mt-1"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Location</h4>
+                                    <p class="text-gray-400">Kurnool, Andhra Pradesh, India</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-violet-400 text-xl mr-4 mt-1"><i class="fas fa-calendar-check"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Availability</h4>
+                                    <p class="text-gray-400">Open for internships and projects</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="py-24 px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-white">
+                    My <span class="text-violet-400">Skills</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 border-t-4 border-t-violet-500 p-8 rounded-lg text-center slide-in">
+                        <h3 class="text-2xl font-semibold text-white mb-6 flex items-center justify-center gap-x-3">
+                            <i class="fas fa-code text-violet-400"></i>
+                            Programming Languages
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li>C</li>
+                            <li>C++</li>
+                            <li>Java</li>
+                            <li>Python</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 border-t-4 border-t-violet-500 p-8 rounded-lg text-center slide-in">
+                        <h3 class="text-2xl font-semibold text-white mb-6 flex items-center justify-center gap-x-3">
+                            <i class="fas fa-cubes text-violet-400"></i>
+                            Libraries & Frameworks
+                        </h3>
+                        <p class="text-sm text-gray-400 -mt-4 mb-4">(Data Analysis & Visualization)</p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li>NumPy</li>
+                            <li>Pandas</li>
+                            <li>Matplotlib</li>
+                            <li>Seaborn</li>
+                            <li>Tableau</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 border-t-4 border-t-violet-500 p-8 rounded-lg text-center slide-in">
+                        <h3 class="text-2xl font-semibold text-white mb-6 flex items-center justify-center gap-x-3">
+                            <i class="fas fa-wrench text-violet-400"></i>
+                            Tools & Platforms
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li>Excel</li>
+                            <li>Power BI</li>
+                            <li>VS Code</li>
+                            <li>Git & GitHub</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certificates" class="py-24 px-6">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                    Certifications <span class="text-violet-400">& Learning</span>
+                </h2>
+                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                    Continuous learning and professional development for improving my skills and knowledge.
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full certificate-item slide-in" data-full-src="assets/digital.png">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-x-4">
+                                <i class="fas fa-award text-3xl text-violet-400"></i>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">Digital Systems:From Logic Gates to Processors </h3>
+                                    <p class="text-gray-400">via Coursera</p>
+                                </div>
+                            </div>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-x-2"><i class="fas fa-calendar-alt"></i> 2024</p>
+                        <p class="text-gray-400 mb-4 text-sm">Comprehensive course covering the fundamentals of digital systems — from logic gates to processor architecture — emphasizing hardware design, circuit logic, and processor functionality.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Skills Covered:</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Logic Gates</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Digital Circuits</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Processor Design</span>
+                            </div>
+                            <button class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors view-certificate-btn"><i class="fas fa-eye mr-2"></i>View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full certificate-item slide-in" data-full-src="assets\C prog.png">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-x-4">
+                                <i class="fas fa-award text-3xl text-violet-400"></i>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">C </h3>
+                                    <p class="text-gray-400">Neo colab</p>
+                                </div>
+                            </div>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-x-2"><i class="fas fa-calendar-alt"></i> 2024</p>
+                        <p class="text-gray-400 mb-4 text-sm">Comprehensive course covering C fundamentals, procedural programming, data structures concepts like arrays & pointers, and key problem-solving logic.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Skills Covered:</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">C Fundamentals</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">DSA (Data Structures and Algorithms)</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Pointers</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Memory Management</span>
+
+                            </div>
+                            <button class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors view-certificate-btn"><i class="fas fa-eye mr-2"></i>View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full certificate-item slide-in" data-full-src="assets/responsive.png">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-x-4">
+                                <i class="fas fa-award text-3xl text-violet-400"></i>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">Responsive Web Design Developer </h3>
+                                    <p class="text-gray-400">Freecodecamp</p>
+                                </div>
+                            </div>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-x-2"><i class="fas fa-calendar-alt"></i> 2023</p>
+                        <p class="text-gray-400 mb-4 text-sm">Developer Certification representing approximately 300 hours of work, focusing on foundational web design and development principles.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Skills Covered:</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">HTML</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">CSS</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Responsive Design</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Web Accessibility</span>
+                            </div>
+<button class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors view-certificate-btn"><i class="fas fa-eye mr-2"></i>View Certificate</button>
+                        </div>
+                    </div>
+                   
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full certificate-item slide-in" data-full-src="assets\chatgpt.png">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-x-4">
+                                <i class="fas fa-award text-3xl text-violet-400"></i>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white">ChatGPT, Generative AI & LLM</h3>
+                                    <p class="text-gray-400">Infosys</p>
+                                </div>
+                            </div>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-x-2"><i class="fas fa-calendar-alt"></i> 2025</p>
+                        <p class="text-gray-400 mb-4 text-sm">This course provided specialized training on how to effectively instruct and interact with advanced AI models like ChatGPT-4 and other Large Language Models (LLMs).</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Skills Covered:</h4>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Prompt Engineering</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">Generative AI Concepts</span>
+                            </div>
+                            <button class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors view-certificate-btn"><i class="fas fa-eye mr-2"></i>View Certificate</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="py-24 px-6">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                    My <span class="text-violet-400">Projects</span>
+                </h2>
+                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                    A showcase of my data science and analytics projects
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full project-card-interactive slide-in">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-semibold text-white">Space Missions Data Analysis using Python</h3>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">This project performs Exploratory Data Analysis (EDA) on global space missions data using Python. It analyzes launch trends, mission costs, company performance, and geographic distribution through data visualization techniques.The project provides meaningful insights into the growth and evolution of the global space industry.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside text-gray-400 space-y-1 mb-4">
+                                <li>Data Cleaning </li>
+                                <li>Trend Analysis</li>
+                                <li>Correlation Study</li>
+                                <li>Company Performance</li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Pandas</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Data Visualization</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="https://github.com/SAI-KALYAN-REDDY/Space-Missions/blob/409b21aa3a512a1784358e9dfc26ec8f4a616f2f/code.py" target="_blank" class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors"><i class="fab fa-github mr-2"></i>Code</a>
+                                <a href="https://www.linkedin.com/posts/saikalyan96_dataanalysis-python-datascience-activity-7316076921249812480-0zdn?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3PZuABC0kk0yM4j8zPdqcLNDF5DMena0M" target="_blank" class="w-full text-center bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors"><i class="fas fa-eye mr-2"></i>Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full project-card-interactive slide-in">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-semibold text-white">Superstore Sales Analysis Dashboard</h3>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">This project presents an interactive sales dashboard built using Power BI to analyze Superstore sales data. It highlights key metrics such as revenue, profit, regional performance, and product category trends using DAX and data modeling techniques. The dashboard enables data-driven decision-making through dynamic filters and visual insights.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside text-gray-400 space-y-1 mb-4">
+                                <li>Interactive Dashboard</li>
+                                <li>Data Modeling</li>
+                                <li>Sales Analysis</li>
+                                <li>Profit Insights</li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Power BI</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Excel</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Business Intelligence Reporting</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="https://github.com/vishnukamatham/Statistical-Analysis-and-Visualization-of-Adidas-US-Retail-Data" target="_blank" class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors"><i class="fab fa-github mr-2"></i>Code</a>
+                                <a href="https://www.linkedin.com/posts/saikalyan96_dataanalytics-dashboarddesign-datavisualization-activity-7405968122228383744-HJGm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3PZuABC0kk0yM4j8zPdqcLNDF5DMena0M" target="_blank" class="w-full text-center bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors"><i class="fas fa-eye mr-2"></i>Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900/60 backdrop-blur-sm border border-gray-700 p-6 rounded-lg flex flex-col h-full project-card-interactive slide-in">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-semibold text-white">Secure File Management System</h3>
+                            <span class="bg-green-500/20 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Completed</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">This project is a Secure File Management System developed using Python with role-based authentication and OTP verification. It allows users to securely manage files through encryption, decryption, renaming, moving, and deletion operations. The system ensures data security using bcrypt password hashing, Fernet encryption, and an SQLite database for user management.</p>
+                        <div class="mt-auto">
+                            <h4 class="font-semibold text-white mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside text-gray-400 space-y-1 mb-4">
+                                <li>User Authentication</li>
+                                <li>OTP Verification</li>
+                                <li>File Encryption & Decryption</li>
+                                <li>Secure File Operations</li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">SQLite</span>
+                                <span class="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-full">bcrypt</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="https://github.com/vishnukamatham/python-projrct" target="_blank" class="w-full text-center bg-transparent border border-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-colors"><i class="fab fa-github mr-2"></i>Code</a>
+                                <a href="#" onclick="alert('Demo is not available for this project. Please view the code on GitHub.'); return false;" class="w-full text-center bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors"><i class="fas fa-eye mr-2"></i>Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contact" class="py-24 px-6">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                    Get in <span class="text-violet-400">Touch</span>
+                </h2>
+                <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                    I am actively seeking internships and collaboration opportunities. Feel free to connect!
+                </p>
+                <div class="grid md:grid-cols-3 gap-12 max-w-4xl mx-auto">
+                    <div class="flex flex-col items-center text-center">
+                        <i class="fas fa-envelope text-4xl text-violet-400 mb-4 contact-icon"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Email</h3>
+                        <a href="mailto:kundamsaikalyan@gmail.com" class="text-gray-300 hover:text-violet-400 transition-colors contact-link">kundamsaikalyan@gmail.com</a>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <i class="fas fa-phone-alt text-4xl text-violet-400 mb-4 contact-icon"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Phone</h3>
+                        <a href="tel:+919490232062" class="text-gray-300 hover:text-violet-400 transition-colors contact-link">+91-9490232062</a> 
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <i class="fas fa-map-marker-alt text-4xl text-violet-400 mb-4 contact-icon"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Location</h3>
+                        <p class="text-gray-300">Kurnool, Andhra Pradesh, India</p> 
+                    </div>
+                </div>
+                <div class="flex justify-center space-x-6 mt-12">
+                    <a href="https://www.linkedin.com/in/saikalyan96/" target="_blank" class="text-4xl text-gray-400 hover:text-violet-400 transition-colors contact-icon"><i class="fab fa-linkedin"></i></a> 
+                    <a href="https://github.com/SAI-KALYAN-REDDY" target="_blank" class="text-4xl text-gray-400 hover:text-violet-400 transition-colors contact-icon"><i class="fab fa-github"></i></a> 
+                    <a href="mailto:kundamsaikalyan@gmail.com" class="text-4xl text-gray-400 hover:text-violet-400 transition-colors contact-icon"><i class="fas fa-envelope"></i></a> 
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="bg-black/20 text-center py-6 text-gray-400 text-sm border-t border-gray-800">
+            <p>&copy; <span id="current-year"></span> K. SAI KALYAN REDDY. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <div id="certificate-modal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4" aria-modal="true" role="dialog">
+        <div class="relative max-w-4xl max-h-full w-full bg-gray-900 rounded-lg shadow-2xl">
+            <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl z-10 hover:text-violet-400 transition-colors" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="p-4 sm:p-6 overflow-y-auto max-h-[90vh]">
+                <img id="modal-image" src="" alt="Full-size Certificate" class="w-full h-auto rounded object-contain">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Scroll Animations (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // 3. Functional Certificate Modal/Lightbox (Day 3 Implementation)
+        const modal = document.getElementById('certificate-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModalButton = document.getElementById('close-modal');
+
+        // Open Modal
+        document.querySelectorAll('.view-certificate-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const certItem = e.target.closest('.certificate-item');
+                const imgSrc = certItem.getAttribute('data-full-src');
+                
+                modalImage.src = imgSrc;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevents background scrolling
+            });
+        });
+
+        // Close Modal Function
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restores background scrolling
+            modalImage.src = '';
+        }
+
+        // Close Modal on button click
+        closeModalButton.addEventListener('click', closeModal);
+
+        // Close Modal on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close Modal on ESC key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Footer Year Update
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
